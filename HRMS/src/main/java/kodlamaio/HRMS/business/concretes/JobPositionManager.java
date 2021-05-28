@@ -1,6 +1,8 @@
 package kodlamaio.HRMS.business.concretes;
 
 import kodlamaio.HRMS.business.abstracts.JobPositionService;
+import kodlamaio.HRMS.core.utilities.results.DataResult;
+import kodlamaio.HRMS.core.utilities.results.SuccessDataResult;
 import kodlamaio.HRMS.dataAccess.abstracts.JobPositionDao;
 import kodlamaio.HRMS.entities.concretes.JobPosition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,8 @@ public class JobPositionManager implements JobPositionService {
     }
 
     @Override
-    public List<JobPosition> getAll() {
-        return this.jobPositionDao.findAll();
+    public DataResult<List<JobPosition>> getAll() {
+        return new SuccessDataResult<List<JobPosition>>
+                (this.jobPositionDao.findAll(),"Data Listelendi");
     }
 }
