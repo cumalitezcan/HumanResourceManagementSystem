@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name="users")
+@Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
