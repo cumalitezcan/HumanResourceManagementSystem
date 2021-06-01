@@ -2,6 +2,7 @@ package kodlamaio.HRMS.business.concretes;
 
 import kodlamaio.HRMS.business.abstracts.JobPositionService;
 import kodlamaio.HRMS.core.utilities.results.DataResult;
+import kodlamaio.HRMS.core.utilities.results.Result;
 import kodlamaio.HRMS.core.utilities.results.SuccessDataResult;
 import kodlamaio.HRMS.dataAccess.abstracts.JobPositionDao;
 import kodlamaio.HRMS.entities.concretes.JobPosition;
@@ -15,7 +16,7 @@ public class JobPositionManager implements JobPositionService {
 
     private JobPositionDao jobPositionDao;
 
-    @Autowired
+   @Autowired
     public JobPositionManager(JobPositionDao jobPositionDao) {
         super();
         this.jobPositionDao = jobPositionDao;
@@ -24,6 +25,16 @@ public class JobPositionManager implements JobPositionService {
     @Override
     public DataResult<List<JobPosition>> getAll() {
         return new SuccessDataResult<List<JobPosition>>
-                (this.jobPositionDao.findAll(),"Data Listelendi");
+                (this.jobPositionDao.findAll(),"Job List");
+
     }
+
+    @Override
+    public Result add(JobPosition jobPosition) {
+        this.jobPositionDao.save(jobPosition);
+
+        return new SuccessDataResult("Job added");
+    }
+
+
 }

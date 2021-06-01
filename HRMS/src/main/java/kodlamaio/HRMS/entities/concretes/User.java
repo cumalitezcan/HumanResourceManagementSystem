@@ -8,16 +8,20 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name="job_titles")
+@Table(name="users")
+@Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobPosition {
-
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="email")
+    private String email;
+
+    @Column(name="password")
+    private String password;
+
 }
