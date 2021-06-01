@@ -6,6 +6,7 @@ import kodlamaio.HRMS.core.utilities.results.Result;
 import kodlamaio.HRMS.core.utilities.results.SuccessDataResult;
 import kodlamaio.HRMS.dataAccess.abstracts.EmployerDao;
 import kodlamaio.HRMS.entities.concretes.Employer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class EmployerManager implements EmployerService {
 
    private EmployerDao employerDao;
 
+   @Autowired
     public EmployerManager(EmployerDao employerDao) {
         super();
         this.employerDao = employerDao;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name="/api/employers")
+@RequestMapping("/api/employers")
 public class EmployersController {
 
     private EmployerService employerService;
@@ -21,12 +21,12 @@ public class EmployersController {
         this.employerService = employerService;
     }
 
-    @GetMapping
+    @GetMapping("/getall")
     public DataResult<List<Employer>> getAll(){
         return this.employerService.getAll();
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public Result add(@RequestBody  Employer employer){
         return this.employerService.add(employer);
     }
