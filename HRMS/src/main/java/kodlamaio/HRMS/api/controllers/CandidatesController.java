@@ -30,5 +30,9 @@ public class CandidatesController {
         return this.candidateService.add(candidate);
     }
 
+    @PostMapping("/delete")
+    public Result delete(@RequestBody int id){
+        return this.candidateService.delete(id);
+    }
 
 }

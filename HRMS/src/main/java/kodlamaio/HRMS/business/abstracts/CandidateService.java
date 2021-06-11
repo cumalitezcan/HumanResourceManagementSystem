@@ -12,4 +12,6 @@ public interface CandidateService {
      Result add(Candidate candidate);
      DataResult<Candidate> getByEmail(String email);
      DataResult<Candidate> getByNationalIdentity(String nationalIdentity);
+     DataResult<Candidate> getById(int id);
+     Result delete(int id);
 }

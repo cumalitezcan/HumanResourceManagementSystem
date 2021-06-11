@@ -1,6 +1,7 @@
 package kodlamaio.HRMS.business.concretes;
 
 import kodlamaio.HRMS.business.abstracts.CandidateService;
+import kodlamaio.HRMS.core.adapter.CheckMernisService;
 import kodlamaio.HRMS.core.utilities.results.*;
 import kodlamaio.HRMS.dataAccess.abstracts.CandidateDao;
 import kodlamaio.HRMS.entities.concretes.Candidate;
@@ -15,10 +16,13 @@ public class CandidateManager implements CandidateService {
 
 
     private CandidateDao candidateDao;
+    private CheckMernisService checkMernisService;
 
     @Autowired
-    public CandidateManager(CandidateDao candidateDao) {
+    public CandidateManager(CandidateDao candidateDao,CheckMernisService checkMernisService) {
+       super();
         this.candidateDao = candidateDao;
+        this.checkMernisService = checkMernisService;
     }
 
     //Tüm alanlar zorunlu mu?
@@ -58,8 +62,11 @@ public class CandidateManager implements CandidateService {
 
     @Override
     public Result add(Candidate candidate) {
-     if(!validationForCandidate(candidate)){
-         return new ErrorResult("Not a valid person");
+        if(!checkMernisService.checkIfRealTcNo(candidate)){
+            return new ErrorResult("Not a valid person");
+        }
+    else if(!validationForCandidate(candidate)){
+         return new ErrorResult("You have entered incomplete information. Please check your information again.");
      }
      if(!checkIfEmailExists(candidate.getEmail())){
          return new ErrorResult("This email address already exists");
@@ -80,6 +87,17 @@ public class CandidateManager implements CandidateService {
     @Override
     public DataResult<Candidate> getByNationalIdentity(String nationalIdentity) {
         return new SuccessDataResult<Candidate>(this.candidateDao.findByNationalIdentity(nationalIdentity));
+    }
+
+    @Override
+    public DataResult<Candidate> getById(int id) {
+        return new SuccessDataResult<Candidate>(this.candidateDao.findById(id));
+    }
+
+    @Override
+    public Result delete(int id) {
+        this.candidateDao.deleteById(id);
+        return new SuccessResult("Candidate deleted");
     }
 
 
