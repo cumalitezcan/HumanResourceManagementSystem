@@ -2,6 +2,7 @@ package kodlamaio.HRMS.business.concretes;
 
 import kodlamaio.HRMS.business.abstracts.JobPositionService;
 import kodlamaio.HRMS.core.utilities.results.DataResult;
+import kodlamaio.HRMS.core.utilities.results.ErrorResult;
 import kodlamaio.HRMS.core.utilities.results.Result;
 import kodlamaio.HRMS.core.utilities.results.SuccessDataResult;
 import kodlamaio.HRMS.dataAccess.abstracts.JobPositionDao;
@@ -22,6 +23,13 @@ public class JobPositionManager implements JobPositionService {
         this.jobPositionDao = jobPositionDao;
     }
 
+    private boolean checkIfPositionExists(String jobPosition) {
+        if(this.jobPositionDao.findByTitle(jobPosition) != null) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public DataResult<List<JobPosition>> getAll() {
         return new SuccessDataResult<List<JobPosition>>
@@ -31,6 +39,11 @@ public class JobPositionManager implements JobPositionService {
 
     @Override
     public Result add(JobPosition jobPosition) {
+
+        if(!this.checkIfPositionExists(jobPosition.getTitle())) {
+            return new ErrorResult("This position already exists in the system.");
+        }
+
         this.jobPositionDao.save(jobPosition);
 
         return new SuccessDataResult("Job added");
