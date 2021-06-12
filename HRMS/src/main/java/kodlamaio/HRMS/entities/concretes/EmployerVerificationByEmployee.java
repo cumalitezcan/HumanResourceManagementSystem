@@ -5,23 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
-@Table(name="job_titles")
-@NoArgsConstructor
+@Table(name="employee_confirm_employers")
 @AllArgsConstructor
-public class JobPosition {
+@NoArgsConstructor
+public class EmployerVerificationByEmployee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="employer_id")
+    private int employerId;
 
-    @OneToMany(mappedBy = "jobPosition")
-    private List<JobAdvert> jobAdverts;
 }

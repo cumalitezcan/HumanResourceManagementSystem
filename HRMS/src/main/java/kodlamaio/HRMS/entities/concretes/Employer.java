@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,6 +25,9 @@ public class Employer extends User {
 
     @Column(name="phone_number")
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "employer")
+    private List<JobAdvert> jobAdverts;
 
 
 }
