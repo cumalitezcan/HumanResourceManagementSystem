@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/jobadverts/")
+@RequestMapping("/api/jobadverts")
 public class JobAdvertsController {
 
     private JobAdvertService jobAdvertService;
@@ -21,28 +21,28 @@ public class JobAdvertsController {
         this.jobAdvertService = jobAdvertService;
     }
 
-    @GetMapping("getall")
+    @GetMapping("/getall")
     public DataResult<List<JobAdvert>> getAll() {
         return this.jobAdvertService.getAll();
     }
 
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public Result add(@RequestBody JobAdvert product) {
         return this.jobAdvertService.add(product);
     }
 
-    @GetMapping("getAllByPage")
+    @GetMapping("/getAllByPage")
     DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize) {
         return this.jobAdvertService.getAll(pageNo, pageSize);
     }
 
-    @GetMapping("getAllDesc")
+    @GetMapping("/getAllDesc")
     public DataResult<List<JobAdvert>> getAllSorted() {
         return this.jobAdvertService.getAllSorted();
     }
 
-    @GetMapping("getByNameJobAdvert")
+    @GetMapping("/getByNameJobAdvert")
     public DataResult<JobAdvert> getByProductName(@RequestParam String productName){
         return this.jobAdvertService.getByJobAdvertName(productName);
     }

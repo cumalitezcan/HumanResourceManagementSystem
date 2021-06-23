@@ -15,5 +15,5 @@ public interface JobAdvertService {
     DataResult<JobAdvert> getByJobAdvertNameAndJobPosition(String jobAdvertName, int jobPositionId);
     DataResult<List<JobAdvert>> getByJobAdvertNameAndEmployer(String jobAdvertName, int employerId);
     DataResult<List<JobAdvert>> getByJobAdvertNameAndCity(String jobAdvertName, int cityId);
-
+    DataResult<List<JobAdvert>> getByNameAndCity(String jobAdvertName, int cityId);
 }

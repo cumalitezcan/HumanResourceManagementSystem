@@ -1,5 +1,6 @@
 package kodlamaio.HRMS.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,5 +53,9 @@ public class JobAdvert {
     @Column(name = "application_deadline")
     private LocalDate applicationDeadline;
 
+    @Column(name = "published_date")
+    private LocalDate publishedDate;
 
+    @Column (name = "is_open",columnDefinition="boolean default true")
+    private boolean isOpen;
 }

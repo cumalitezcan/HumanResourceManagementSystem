@@ -68,4 +68,9 @@ public class JobAdvertManager implements JobAdvertService {
     public DataResult<List<JobAdvert>> getByJobAdvertNameAndCity(String jobAdvertName, int cityId) {
         return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByJobAdvertNameAndCityId(jobAdvertName, cityId));
     }
+
+    @Override
+    public DataResult<List<JobAdvert>> getByNameAndCity(String jobAdvertName, int cityId) {
+        return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByNameAndCity(jobAdvertName, cityId));
+    }
 }

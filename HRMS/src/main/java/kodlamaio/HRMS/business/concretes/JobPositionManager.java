@@ -6,6 +6,7 @@ import kodlamaio.HRMS.core.utilities.results.ErrorResult;
 import kodlamaio.HRMS.core.utilities.results.Result;
 import kodlamaio.HRMS.core.utilities.results.SuccessDataResult;
 import kodlamaio.HRMS.dataAccess.abstracts.JobPositionDao;
+import kodlamaio.HRMS.entities.concretes.JobAdvert;
 import kodlamaio.HRMS.entities.concretes.JobPosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class JobPositionManager implements JobPositionService {
     }
 
     private boolean checkIfPositionExists(String jobPosition) {
-        if(this.jobPositionDao.findByTitle(jobPosition) != null) {
+        if(this.jobPositionDao.getByTitle(jobPosition) != null) {
             return false;
         }
         return true;
@@ -47,6 +48,11 @@ public class JobPositionManager implements JobPositionService {
         this.jobPositionDao.save(jobPosition);
 
         return new SuccessDataResult("Job added");
+    }
+
+    @Override
+    public DataResult<JobPosition> getByTitle(String title) {
+        return new SuccessDataResult<JobPosition>(this.jobPositionDao.getByTitle(title));
     }
 
 
