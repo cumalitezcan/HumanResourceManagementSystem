@@ -44,8 +44,6 @@ public class AuthManager implements AuthService {
             return new ErrorResult("Invalid email address. Please enter your email address correctly.");
 
         }else if(!employer.getPassword().equals(confirmPassword)){
-            System.out.println(employer.getPassword());
-            System.out.println(confirmPassword);
 
             return new ErrorResult("Password does not match. Please re-enter your password");
         }
