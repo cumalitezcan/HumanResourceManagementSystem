@@ -58,4 +58,6 @@ public class JobAdvert {
 
     @Column (name = "is_open",columnDefinition="boolean default true")
     private boolean isOpen;
+
+
 }

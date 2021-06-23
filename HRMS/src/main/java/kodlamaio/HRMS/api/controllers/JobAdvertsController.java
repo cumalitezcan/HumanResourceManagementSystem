@@ -28,8 +28,13 @@ public class JobAdvertsController {
 
 
     @PostMapping("/add")
-    public Result add(@RequestBody JobAdvert product) {
-        return this.jobAdvertService.add(product);
+    public Result add(@RequestBody JobAdvert jobAdvert) {
+        return this.jobAdvertService.add(jobAdvert);
+    }
+
+    @PostMapping("/update")
+    public Result update(@RequestBody JobAdvert jobAdvert) {
+        return jobAdvertService.update(jobAdvert);
     }
 
     @GetMapping("/getAllByPage")
@@ -43,8 +48,33 @@ public class JobAdvertsController {
     }
 
     @GetMapping("/getByNameJobAdvert")
-    public DataResult<JobAdvert> getByProductName(@RequestParam String productName){
-        return this.jobAdvertService.getByJobAdvertName(productName);
+    public DataResult<JobAdvert> getByJobAdvertName(@RequestParam String jobAdvertName){
+        return this.jobAdvertService.getByJobAdvertName(jobAdvertName);
+    }
+
+    @GetMapping("/getAllActiveJobAdverts")
+    public DataResult<List<JobAdvert>> getAllActiveJobAdverts() {
+        return this.jobAdvertService.getAllActiveJobAdverts();
+    }
+
+    @GetMapping("/getAllByCreationDateAsc")
+    public DataResult<List<JobAdvert>> getAllByCreationDateAsc(){
+        return jobAdvertService.getAllByCreationDateAsc();
+    }
+
+    @GetMapping("/getByIsActiveTrueAndEmployer_CompanyName")
+    public DataResult<List<JobAdvert>> getByIsActiveTrueAndEmployer_CompanyName( String companyName){
+        return this.jobAdvertService.getAllActiveJobAdvertByCompanyName(companyName);
+    }
+
+    @PostMapping("/closeJobAdvert")
+    public Result closeJobAdvert(@RequestParam("id") int id) {
+        return jobAdvertService.closeJobAdvert(id);
+    }
+
+    @PostMapping("/openJobAdvert")
+    public Result openJobAdvert(@RequestParam("id") int id) {
+        return jobAdvertService.openJobAdvert(id);
     }
 
 }

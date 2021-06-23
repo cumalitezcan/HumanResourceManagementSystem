@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface JobAdvertService {
     Result add (JobAdvert jobAdvert);
+    Result delete(JobAdvert jobAdvert);
+    Result update(JobAdvert jobAdvert);
     DataResult<List<JobAdvert>> getAll();
     DataResult<List<JobAdvert>> getAllSorted();
     DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize);
@@ -16,4 +18,9 @@ public interface JobAdvertService {
     DataResult<List<JobAdvert>> getByJobAdvertNameAndEmployer(String jobAdvertName, int employerId);
     DataResult<List<JobAdvert>> getByJobAdvertNameAndCity(String jobAdvertName, int cityId);
     DataResult<List<JobAdvert>> getByNameAndCity(String jobAdvertName, int cityId);
+    DataResult<List<JobAdvert>> getAllActiveJobAdverts();
+    DataResult<List<JobAdvert>> getAllByCreationDateAsc();
+    DataResult<List<JobAdvert>> getAllActiveJobAdvertByCompanyName(String companyName);
+    public Result closeJobAdvert(int id);
+    public Result openJobAdvert(int id);
 }

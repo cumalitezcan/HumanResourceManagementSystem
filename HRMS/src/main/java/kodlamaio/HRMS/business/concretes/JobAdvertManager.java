@@ -1,10 +1,7 @@
 package kodlamaio.HRMS.business.concretes;
 
 import kodlamaio.HRMS.business.abstracts.JobAdvertService;
-import kodlamaio.HRMS.core.utilities.results.DataResult;
-import kodlamaio.HRMS.core.utilities.results.Result;
-import kodlamaio.HRMS.core.utilities.results.SuccessDataResult;
-import kodlamaio.HRMS.core.utilities.results.SuccessResult;
+import kodlamaio.HRMS.core.utilities.results.*;
 import kodlamaio.HRMS.dataAccess.abstracts.JobAdvertDao;
 import kodlamaio.HRMS.entities.concretes.JobAdvert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +30,26 @@ public class JobAdvertManager implements JobAdvertService {
     }
 
     @Override
+    public Result delete(JobAdvert jobAdvert) {
+        this.jobAdvertDao.delete(jobAdvert);
+        return new SuccessResult("Job Advert deleted");
+
+    }
+
+    @Override
+    public Result update(JobAdvert jobAdvert) {
+        this.jobAdvertDao.save(jobAdvert);
+        return new SuccessResult("Job Advert updated");
+    }
+
+    @Override
     public DataResult<List<JobAdvert>> getAll() {
         return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll());
     }
 
     @Override
     public DataResult<List<JobAdvert>> getAllSorted() {
-        Sort sort = Sort.by(Sort.Direction.ASC,"jobAdvertName");
+        Sort sort = Sort.by(Sort.Direction.DESC,"jobAdvertName");
         return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(sort));
     }
 
@@ -73,4 +83,56 @@ public class JobAdvertManager implements JobAdvertService {
     public DataResult<List<JobAdvert>> getByNameAndCity(String jobAdvertName, int cityId) {
         return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByNameAndCity(jobAdvertName, cityId));
     }
+
+    @Override
+    public DataResult<List<JobAdvert>> getAllActiveJobAdverts() {
+        return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllActiveJobAdverts());
+    }
+
+    @Override
+    public DataResult<List<JobAdvert>> getAllByCreationDateAsc() {
+        return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllByCreationDateAsc());
+    }
+
+    @Override
+    public DataResult<List<JobAdvert>> getAllActiveJobAdvertByCompanyName(String companyName) {
+        return new SuccessDataResult<List<JobAdvert>>(
+                this.jobAdvertDao.getAllActiveJobAdvertByEmployer_CompanyName(companyName));
+    }
+
+    @Override
+    public Result closeJobAdvert(int id) {
+        JobAdvert jobAdvert = jobAdvertDao.getOne(id);
+
+        if (jobAdvert == null) {
+            return new ErrorResult("Job Advert is null");
+        }
+
+        if (jobAdvert.isOpen() == false) {
+            return new ErrorResult("Job Advert is already close");
+        }
+
+        jobAdvert.setOpen(false);
+        update(jobAdvert);
+        return new SuccessResult("Job Advert has been closed");
+    }
+
+    @Override
+    public Result openJobAdvert(int id) {
+        JobAdvert jobAdvert = jobAdvertDao.getOne(id);
+
+        if (jobAdvert == null) {
+            return new ErrorResult("Job Advert is null");
+        }
+
+        if (jobAdvert.isOpen() == true) {
+            return new ErrorResult("Job Advert is already open");
+        }
+
+        jobAdvert.setOpen(true);
+        update(jobAdvert);
+        return new SuccessResult("Job Advert has been opened");
+    }
+
+
 }

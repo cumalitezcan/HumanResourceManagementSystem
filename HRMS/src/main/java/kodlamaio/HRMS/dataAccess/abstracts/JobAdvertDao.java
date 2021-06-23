@@ -15,5 +15,14 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert,Integer> {
     @Query("From JobAdvert where jobAdvertName=:jobAdvertName and city.id=:cityId")
     List<JobAdvert> getByNameAndCity(String jobAdvertName, int cityId);
 
+    @Query("From JobAdvert where isOpen = true") //aktif iş ilanlarını listeler
+    List<JobAdvert> getAllActiveJobAdverts();
+
+    @Query("From JobAdvert where isOpen = true Order By publishedDate asc ") //tarihe göre listeler
+    List<JobAdvert> getAllByCreationDateAsc();
+
+
+    @Query("From JobAdvert where isOpen = true and employer.companyName=:companyName") //şirket ismine göre listeler
+    List<JobAdvert> getAllActiveJobAdvertByEmployer_CompanyName(String companyName);
 
 }
