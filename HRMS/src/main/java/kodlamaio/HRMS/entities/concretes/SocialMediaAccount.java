@@ -7,25 +7,25 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Table(name="social_media_accounts")
 @Data
-@Table(name="employee_confirm_employers")
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployerVerificationByEmployee {
+public class SocialMediaAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
-    @Column(name="employer_id")
-    private int employerId;
+    @Column(name="name")
+    private String name;
 
-    @Column(name="employee_id")
-    private int employeeId;
+    @Column(name="link")
+    private String link;
 
-    @Column(name="is_confirmed",columnDefinition="boolean default false")
-    private int isConfirmed;
-
+    @ManyToOne
+    @JoinColumn(name = "candidate_id")
+    private Candidate candidate;
 
 }
