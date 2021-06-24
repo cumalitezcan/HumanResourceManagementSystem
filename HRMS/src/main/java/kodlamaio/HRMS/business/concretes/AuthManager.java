@@ -29,6 +29,14 @@ public class AuthManager implements AuthService {
         this.verificationService = verificationService;
     }
 
+    public boolean confirmPassword(String password,String confirmPassword)
+    {
+        if (password.equals(confirmPassword)) {
+
+            return true;
+        }
+        return false;
+    }
 
     public static boolean isEmailValidation(String email) {
         final Pattern EMAIL_REGEX = Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
@@ -43,8 +51,7 @@ public class AuthManager implements AuthService {
         if(!isEmailValidation(employer.getEmail())){
             return new ErrorResult("Invalid email address. Please enter your email address correctly.");
 
-        }else if(!employer.getPassword().equals(confirmPassword)){
-
+        }else if(!this.confirmPassword(employer.getPassword(),confirmPassword)){
             return new ErrorResult("Password does not match. Please re-enter your password");
         }
         var result = this.employerService.add(employer);
@@ -65,14 +72,14 @@ public class AuthManager implements AuthService {
         {
             return new ErrorResult("Invalid email address. Please enter your email address correctly.");
         }
-        else if(!candidate.getPassword().equals(confirmPassword)) {
+        else if(!this.confirmPassword(candidate.getPassword(),confirmPassword)) {
             return new ErrorResult("Password does not match. Please re-enter your password.");
         }
         var result = this.candidateService.add(candidate);
 
         if(result.isSuccess()) {
             if(this.verificationService.sendVerificationCode(candidate.getEmail())) {
-                return new SuccessResult("Employer Registered.");
+                return new SuccessResult("Candidate Registered.");
             }
         }
 
