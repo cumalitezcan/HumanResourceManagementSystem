@@ -54,9 +54,9 @@ public class Candidate extends User {
     @OneToMany(mappedBy = "candidate")
     private List<SocialMediaAccount> socialMediaAccounts;
 
-    @JsonIgnore
+    /*@JsonIgnore
     @OneToOne(mappedBy = "candidate", optional=false, fetch=FetchType.LAZY)
-    private Image image;
+    private Image image;*/
 
     @Transient //It means that a field in the Entity class will not have a column counterpart in the database.
     private String passwordValidation;

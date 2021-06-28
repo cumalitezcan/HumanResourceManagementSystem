@@ -37,4 +37,8 @@ public class JobExperienceManager implements JobExperienceService {
     public DataResult<JobExperience> getById(int id) {
         return new SuccessDataResult<JobExperience>(this.jobExperienceDao.getById(id));
     }
+
+    @Override
+    public DataResult<List<JobExperience>> getByCandidate_Id(int candidateId) {
+        return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.getByCandidate_Id(candidateId));    }
 }

@@ -10,5 +10,7 @@ import java.util.List;
 public interface SocialMediaAccountService {
     Result add(SocialMediaAccount socialMediaAccount);
     DataResult<List<SocialMediaAccount>> getAll();
-  
+    DataResult<List<SocialMediaAccount>> getByCandidate_Id(int candidateId);
+
+
 }

@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="images")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Image {
 
     @Id
@@ -25,8 +26,8 @@ public class Image {
     @Column(name = "created_date")
     private LocalDate createdDate;
 
-    @OneToOne
-    @JoinColumn(name = "candidate_id")
-    private Candidate candidate;
+   /* @OneToOne
+    @JoinColumn(name = "id")
+    private User user;*/
 
 }

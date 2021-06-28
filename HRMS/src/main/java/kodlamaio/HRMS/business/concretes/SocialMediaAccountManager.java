@@ -33,5 +33,10 @@ public class SocialMediaAccountManager implements SocialMediaAccountService {
         return new SuccessDataResult<List<SocialMediaAccount>>(this.socialMediaAccountDao.findAll());
     }
 
+    @Override
+    public DataResult<List<SocialMediaAccount>> getByCandidate_Id(int candidateId) {
+        return new SuccessDataResult<List<SocialMediaAccount>>(this.socialMediaAccountDao.getByCandidate_Id(candidateId));
+    }
+
 
 }

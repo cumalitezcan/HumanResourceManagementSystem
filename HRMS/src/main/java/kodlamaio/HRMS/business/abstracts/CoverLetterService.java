@@ -10,4 +10,5 @@ public interface CoverLetterService {
     Result add(CoverLetter coverLetter);
     DataResult<List<CoverLetter>> getAll();
     DataResult<CoverLetter> getById(int id);
+    DataResult<CoverLetter> getByCandidateId(int candidateId);
 }

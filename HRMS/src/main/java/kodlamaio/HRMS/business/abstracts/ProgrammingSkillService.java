@@ -10,5 +10,7 @@ public interface ProgrammingSkillService {
     Result add(ProgrammingSkill programmingSkill);
     DataResult<List<ProgrammingSkill>> getAll();
     DataResult<ProgrammingSkill> getById(int id);
+    DataResult<List<ProgrammingSkill>> getByCandidateId(int candidateId);
+
 
 }
