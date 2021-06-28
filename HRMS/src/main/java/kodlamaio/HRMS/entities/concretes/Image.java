@@ -24,10 +24,10 @@ public class Image {
     private String url;
 
     @Column(name = "created_date")
-    private LocalDate createdDate;
+    private LocalDate createdDate = LocalDate.now();
 
-   /* @OneToOne
-    @JoinColumn(name = "id")
-    private User user;*/
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

@@ -18,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Candidate extends User {
 
+
+
     @Column(name="first_name")
     private String firstName;
 
@@ -54,9 +56,6 @@ public class Candidate extends User {
     @OneToMany(mappedBy = "candidate")
     private List<SocialMediaAccount> socialMediaAccounts;
 
-    /*@JsonIgnore
-    @OneToOne(mappedBy = "candidate", optional=false, fetch=FetchType.LAZY)
-    private Image image;*/
 
     @Transient //It means that a field in the Entity class will not have a column counterpart in the database.
     private String passwordValidation;

@@ -33,9 +33,9 @@ public class User {
     @Column(name="password")
     private String password;
 
-  /*  @JsonIgnore
+    @JsonIgnore
     @OneToOne(mappedBy = "user", optional=false, fetch=FetchType.LAZY)
-    private Image image;*/
+    private Image image;
 
 
 }

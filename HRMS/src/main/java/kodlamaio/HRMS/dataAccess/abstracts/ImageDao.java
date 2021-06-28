@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ImageDao extends JpaRepository<Image,Integer> {
     Image getById(int id);
-    //Image getByUser_Id(int userId);
+    Image getByUser_Id(int userId);
 
 }

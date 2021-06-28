@@ -13,7 +13,7 @@ import java.util.List;
 public class CvDto {
 
     private User user;
-    //private Image image;
+    private Image image;
     private CoverLetter coverLetter;
     private List<School> schools;
     private List<ProgrammingSkill>	programmingSkills;
