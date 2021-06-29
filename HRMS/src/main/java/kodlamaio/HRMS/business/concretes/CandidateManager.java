@@ -1,10 +1,11 @@
 package kodlamaio.HRMS.business.concretes;
 
-import kodlamaio.HRMS.business.abstracts.CandidateService;
+import kodlamaio.HRMS.business.abstracts.*;
 import kodlamaio.HRMS.core.adapter.CheckMernisService;
 import kodlamaio.HRMS.core.utilities.results.*;
 import kodlamaio.HRMS.dataAccess.abstracts.CandidateDao;
 import kodlamaio.HRMS.entities.concretes.Candidate;
+import kodlamaio.HRMS.entities.dtos.CvDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,31 @@ import java.util.Objects;
 public class CandidateManager implements CandidateService {
 
 
-    private CandidateDao candidateDao;
     private CheckMernisService checkMernisService;
+    private CandidateDao candidateDao;
+    //private ImageService imageService;
+    private CoverLetterService coverLetterService;
+    private JobExperienceService jobExperienceService;
+    private SchoolService schoolService;
+    private LanguageService languageService;
+    private ProgrammingSkillService programmingSkillService;
+    private SocialMediaAccountService socialMediaAccountService;
 
     @Autowired
-    public CandidateManager(CandidateDao candidateDao,CheckMernisService checkMernisService) {
+    public CandidateManager(CandidateDao candidateDao,CheckMernisService checkMernisService,
+                            CoverLetterService coverLetterService, JobExperienceService jobExperienceService, SchoolService schoolService,
+                            LanguageService languageService, ProgrammingSkillService programmingSkillService,
+                            SocialMediaAccountService socialMediaAccountService) {
        super();
         this.candidateDao = candidateDao;
         this.checkMernisService = checkMernisService;
+        //this.imageService = imageService;
+        this.coverLetterService = coverLetterService;
+        this.jobExperienceService = jobExperienceService;
+        this.schoolService = schoolService;
+        this.languageService = languageService;
+        this.programmingSkillService = programmingSkillService;
+        this.socialMediaAccountService = socialMediaAccountService;
     }
 
     //Tüm alanlar zorunlu mu?
@@ -98,6 +116,20 @@ public class CandidateManager implements CandidateService {
     public Result delete(int id) {
         this.candidateDao.deleteById(id);
         return new SuccessResult("Candidate deleted");
+    }
+
+    @Override
+    public DataResult<CvDto> getCandidateCv(int candidateId) {
+        CvDto cv = new CvDto();
+        cv.setUser(this.getById(candidateId).getData());
+        //cv.setImage(this.imageService.getByUserId(candidateId).getData());
+        cv.setCoverLetter(this.coverLetterService.getByCandidateId(candidateId).getData());
+        cv.setSchools(this.schoolService.getByCandidateId(candidateId).getData());
+        cv.setLanguages(this.languageService.getByCandidate_Id(candidateId).getData());
+        cv.setProgrammingSkills(this.programmingSkillService.getByCandidateId(candidateId).getData());
+        cv.setExperiences(this.jobExperienceService.getByCandidate_Id(candidateId).getData());
+        cv.setSocialMediaAccounts(this.socialMediaAccountService.getByCandidate_Id(candidateId).getData());
+        return new SuccessDataResult<CvDto>(cv);
     }
 
 
