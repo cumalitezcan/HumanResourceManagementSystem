@@ -4,6 +4,7 @@ import kodlamaio.HRMS.business.abstracts.EmployerService;
 import kodlamaio.HRMS.core.utilities.results.*;
 import kodlamaio.HRMS.dataAccess.abstracts.EmployerDao;
 import kodlamaio.HRMS.entities.concretes.Employer;
+import kodlamaio.HRMS.entities.dtos.EmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +62,10 @@ public class EmployerManager implements EmployerService {
     @Override
     public DataResult<Employer> getByEmail(String email) {
         return new SuccessDataResult<Employer>(this.employerDao.findByEmail(email));
+    }
+
+    @Override
+    public DataResult<List<EmployerDto>> getDto() {
+        return new SuccessDataResult<List<EmployerDto>>(this.employerDao.getDto());
     }
 }

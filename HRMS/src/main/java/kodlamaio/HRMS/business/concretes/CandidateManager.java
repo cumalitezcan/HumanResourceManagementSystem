@@ -5,6 +5,7 @@ import kodlamaio.HRMS.core.adapter.CheckMernisService;
 import kodlamaio.HRMS.core.utilities.results.*;
 import kodlamaio.HRMS.dataAccess.abstracts.CandidateDao;
 import kodlamaio.HRMS.entities.concretes.Candidate;
+import kodlamaio.HRMS.entities.dtos.CandidateDto;
 import kodlamaio.HRMS.entities.dtos.CvDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class CandidateManager implements CandidateService {
 
     private CheckMernisService checkMernisService;
     private CandidateDao candidateDao;
-    //private ImageService imageService;
+    private ImageService imageService;
     private CoverLetterService coverLetterService;
     private JobExperienceService jobExperienceService;
     private SchoolService schoolService;
@@ -34,7 +35,7 @@ public class CandidateManager implements CandidateService {
        super();
         this.candidateDao = candidateDao;
         this.checkMernisService = checkMernisService;
-        //this.imageService = imageService;
+        this.imageService = imageService;
         this.coverLetterService = coverLetterService;
         this.jobExperienceService = jobExperienceService;
         this.schoolService = schoolService;
@@ -122,7 +123,7 @@ public class CandidateManager implements CandidateService {
     public DataResult<CvDto> getCandidateCv(int candidateId) {
         CvDto cv = new CvDto();
         cv.setUser(this.getById(candidateId).getData());
-        //cv.setImage(this.imageService.getByUserId(candidateId).getData());
+        cv.setImage(this.imageService.getByUserId(candidateId).getData());
         cv.setCoverLetter(this.coverLetterService.getByCandidateId(candidateId).getData());
         cv.setSchools(this.schoolService.getByCandidateId(candidateId).getData());
         cv.setLanguages(this.languageService.getByCandidate_Id(candidateId).getData());
@@ -131,6 +132,12 @@ public class CandidateManager implements CandidateService {
         cv.setSocialMediaAccounts(this.socialMediaAccountService.getByCandidate_Id(candidateId).getData());
         return new SuccessDataResult<CvDto>(cv);
     }
+
+    @Override
+    public DataResult<List<CandidateDto>> getDto() {
+        return new SuccessDataResult<List<CandidateDto>>(this.candidateDao.getDto());
+    }
+
 
 
 }
