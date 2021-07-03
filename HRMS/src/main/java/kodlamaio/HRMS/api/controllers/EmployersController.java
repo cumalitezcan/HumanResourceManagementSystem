@@ -5,6 +5,8 @@ import kodlamaio.HRMS.core.utilities.results.DataResult;
 import kodlamaio.HRMS.core.utilities.results.ErrorDataResult;
 import kodlamaio.HRMS.core.utilities.results.Result;
 import kodlamaio.HRMS.entities.concretes.Employer;
+import kodlamaio.HRMS.entities.dtos.EmployeeDto;
+import kodlamaio.HRMS.entities.dtos.EmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -43,6 +45,10 @@ public class EmployersController {
         return this.employerService.getByEmail(email);
     }
 
+    @GetMapping("/getEmployerDto")
+    public DataResult<List<EmployerDto>> getDto(){
+        return this.employerService.getDto();
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

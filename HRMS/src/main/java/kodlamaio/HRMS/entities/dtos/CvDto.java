@@ -18,6 +18,6 @@ public class CvDto {
     private List<School> schools;
     private List<ProgrammingSkill>	programmingSkills;
     private List<Language> languages;
-    private List<JobExperience> experiences;
+    private List<JobExperience> jobExperiences;
     private List<SocialMediaAccount> socialMediaAccounts;
 }

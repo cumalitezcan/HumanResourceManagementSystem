@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="images")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Image {
 
     @Id
@@ -26,7 +25,7 @@ public class Image {
     @Column(name = "created_date")
     private LocalDate createdDate = LocalDate.now();
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

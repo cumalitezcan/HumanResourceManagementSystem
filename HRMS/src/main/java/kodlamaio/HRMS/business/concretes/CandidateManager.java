@@ -31,8 +31,8 @@ public class CandidateManager implements CandidateService {
     public CandidateManager(CandidateDao candidateDao,CheckMernisService checkMernisService,
                             CoverLetterService coverLetterService, JobExperienceService jobExperienceService, SchoolService schoolService,
                             LanguageService languageService, ProgrammingSkillService programmingSkillService,
-                            SocialMediaAccountService socialMediaAccountService) {
-       super();
+                            SocialMediaAccountService socialMediaAccountService,ImageService imageService) {
+        super();
         this.candidateDao = candidateDao;
         this.checkMernisService = checkMernisService;
         this.imageService = imageService;
@@ -81,12 +81,12 @@ public class CandidateManager implements CandidateService {
 
     @Override
     public Result add(Candidate candidate) {
-        if(!checkMernisService.checkIfRealTcNo(candidate)){
+      /*  if(!checkMernisService.checkIfRealTcNo(candidate)){
             return new ErrorResult("Not a valid person");
         }
     else if(!validationForCandidate(candidate)){
          return new ErrorResult("You have entered incomplete information. Please check your information again.");
-     }
+     }*/
      if(!checkIfEmailExists(candidate.getEmail())){
          return new ErrorResult("This email address already exists");
      }
@@ -110,7 +110,7 @@ public class CandidateManager implements CandidateService {
 
     @Override
     public DataResult<Candidate> getById(int id) {
-        return new SuccessDataResult<Candidate>(this.candidateDao.findById(id));
+        return new SuccessDataResult<Candidate>(this.candidateDao.getById(id));
     }
 
     @Override
@@ -128,7 +128,7 @@ public class CandidateManager implements CandidateService {
         cv.setSchools(this.schoolService.getByCandidateId(candidateId).getData());
         cv.setLanguages(this.languageService.getByCandidate_Id(candidateId).getData());
         cv.setProgrammingSkills(this.programmingSkillService.getByCandidateId(candidateId).getData());
-        cv.setExperiences(this.jobExperienceService.getByCandidate_Id(candidateId).getData());
+        cv.setJobExperiences(this.jobExperienceService.getByCandidate_Id(candidateId).getData());
         cv.setSocialMediaAccounts(this.socialMediaAccountService.getByCandidate_Id(candidateId).getData());
         return new SuccessDataResult<CvDto>(cv);
     }

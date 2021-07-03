@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,8 +35,8 @@ public class User {
     private String password;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "user", optional=false, fetch=FetchType.LAZY)
-    private Image image;
+    @OneToMany(mappedBy = "user")
+    private List<Image> images;
 
 
 }

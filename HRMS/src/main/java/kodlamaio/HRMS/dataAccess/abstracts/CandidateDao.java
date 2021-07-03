@@ -11,11 +11,11 @@ public interface CandidateDao extends JpaRepository<Candidate,Integer> {
 
     Candidate findByEmail(String email);
     Candidate findByNationalIdentity(String nationalIdentity);
-    Candidate findById(int id);
+    Candidate getById(int id);
     Candidate deleteById(int id);
 
     @Query("Select new  kodlamaio.HRMS.entities.dtos.CandidateDto"
             + "(c.firstName, c.lastName, c.email, i.url) "
-            + "From Candidate c Inner Join c.image i")
+            + "From Candidate c Inner Join c.images i")
     List<CandidateDto> getDto();
 }

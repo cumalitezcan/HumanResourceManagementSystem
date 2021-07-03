@@ -5,6 +5,7 @@ import kodlamaio.HRMS.core.utilities.results.DataResult;
 import kodlamaio.HRMS.core.utilities.results.ErrorDataResult;
 import kodlamaio.HRMS.core.utilities.results.Result;
 import kodlamaio.HRMS.entities.concretes.Candidate;
+import kodlamaio.HRMS.entities.dtos.CandidateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class CandidatesController {
         this.candidateService = candidateService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<Candidate>> getAll(){
         return this.candidateService.getAll();
     }
@@ -50,6 +51,12 @@ public class CandidatesController {
     public ResponseEntity<?> getCv(@RequestParam int candidateId){
         return ResponseEntity.ok(this.candidateService.getCandidateCv(candidateId));
     }
+
+    @GetMapping("/getCandidateDto")
+    public DataResult<List<CandidateDto>> getDto(){
+        return this.candidateService.getDto();
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

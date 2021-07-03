@@ -57,7 +57,6 @@ public class Candidate extends User {
     private List<SocialMediaAccount> socialMediaAccounts;
 
 
-    @Transient //It means that a field in the Entity class will not have a column counterpart in the database.
-    private String passwordValidation;
+
 
 }
