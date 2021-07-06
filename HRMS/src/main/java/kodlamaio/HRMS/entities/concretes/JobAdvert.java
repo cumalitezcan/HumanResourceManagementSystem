@@ -22,7 +22,6 @@ public class JobAdvert {
     private int id;
 
 
-
     @ManyToOne()
     @JoinColumn(name = "employer_id")
     private Employer employer;
@@ -56,7 +55,7 @@ public class JobAdvert {
     @Column(name = "published_date")
     private LocalDate publishedDate;
 
-    @Column (name = "is_open",columnDefinition="boolean default true")
+    @Column (name = "is_open",columnDefinition="boolean default false")
     private boolean isOpen;
 
 

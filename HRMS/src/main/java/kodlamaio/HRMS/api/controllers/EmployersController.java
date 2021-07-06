@@ -30,7 +30,7 @@ public class EmployersController {
         this.employerService = employerService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<Employer>> getAll() {
         return this.employerService.getAll();
     }

@@ -13,7 +13,7 @@ public interface EmployeeDao  extends JpaRepository<Employee, Integer> {
 
 
     @Query("Select new  kodlamaio.HRMS.entities.dtos.EmployeeDto"
-            + "(e.firstName, e.lastName,e.email, e.position, i.url) "
+            + "(e.id,e.firstName, e.lastName,e.email, e.position, i.url) "
             + "From Employee e Inner Join e.images i")
     List<EmployeeDto> getDto();
 }

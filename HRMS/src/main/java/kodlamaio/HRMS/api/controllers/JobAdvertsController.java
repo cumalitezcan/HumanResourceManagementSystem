@@ -22,7 +22,7 @@ public class JobAdvertsController {
         this.jobAdvertService = jobAdvertService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<JobAdvert>> getAll() {
         return this.jobAdvertService.getAll();
     }
