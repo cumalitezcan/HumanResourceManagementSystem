@@ -25,7 +25,7 @@ public class CoverLettersController {
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<CoverLetter> getByCandidateId(int candidateId) {
+    public DataResult<CoverLetter> getByCandidateId(@RequestParam int candidateId) {
         return this.coverLetterService.getByCandidateId(candidateId);
     }
 }

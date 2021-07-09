@@ -4,6 +4,7 @@ import kodlamaio.HRMS.business.abstracts.JobAdvertService;
 import kodlamaio.HRMS.core.utilities.results.DataResult;
 import kodlamaio.HRMS.core.utilities.results.Result;
 import kodlamaio.HRMS.entities.concretes.JobAdvert;
+import kodlamaio.HRMS.entities.dtos.JobAdvertDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,11 @@ public class JobAdvertsController {
         return this.jobAdvertService.getAll();
     }
 
+    @PostMapping("/addDto")
+    public Result add(@RequestBody JobAdvertDto jobAdvertDto) {
+        System.out.println("INFO" + jobAdvertDto.toString());
+        return this.jobAdvertService.create(jobAdvertDto);
+    }
 
     @PostMapping("/add")
     public Result add(@RequestBody JobAdvert jobAdvert) {
@@ -64,7 +70,7 @@ public class JobAdvertsController {
     }
 
     @GetMapping("/getByIsActiveTrueAndEmployer_CompanyName")
-    public DataResult<List<JobAdvert>> getByIsActiveTrueAndEmployer_CompanyName( String companyName){
+    public DataResult<List<JobAdvert>> getByIsActiveTrueAndEmployer_CompanyName(@RequestParam String companyName){
         return this.jobAdvertService.getAllActiveJobAdvertByCompanyName(companyName);
     }
 

@@ -43,7 +43,7 @@ public class CandidatesController {
     }
 
     @PostMapping("/delete")
-    public Result delete(@RequestBody int id){
+    public Result delete(@RequestParam int id){
         return this.candidateService.delete(id);
     }
 

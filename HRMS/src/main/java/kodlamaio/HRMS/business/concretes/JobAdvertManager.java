@@ -2,25 +2,39 @@ package kodlamaio.HRMS.business.concretes;
 
 import kodlamaio.HRMS.business.abstracts.JobAdvertService;
 import kodlamaio.HRMS.core.utilities.results.*;
-import kodlamaio.HRMS.dataAccess.abstracts.JobAdvertDao;
+import kodlamaio.HRMS.dataAccess.abstracts.*;
 import kodlamaio.HRMS.entities.concretes.JobAdvert;
+import kodlamaio.HRMS.entities.dtos.JobAdvertDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class JobAdvertManager implements JobAdvertService {
 
     private JobAdvertDao jobAdvertDao;
+    private JobPositionDao jobPositionDao;
+    private EmployerDao employerDao;
+    private CityDao cityDao;
+    private WorkTimeDao workTimeDao;
+    private WorkPlaceDao workPlaceDao;
 
     @Autowired
-    public JobAdvertManager(JobAdvertDao jobAdvertDao) {
+    public JobAdvertManager(JobAdvertDao jobAdvertDao, JobPositionDao jobPositionDao, EmployerDao employerDao,
+                            CityDao cityDao, WorkPlaceDao workPlaceDao, WorkTimeDao workTimeDao) {
         super();
         this.jobAdvertDao = jobAdvertDao;
+        this.jobPositionDao = jobPositionDao;
+        this.employerDao = employerDao;
+        this.cityDao = cityDao;
+        this.workTimeDao = workTimeDao;
+        this.workPlaceDao = workPlaceDao;
+
     }
 
     @Override
@@ -132,6 +146,28 @@ public class JobAdvertManager implements JobAdvertService {
         jobAdvert.setOpen(true);
         update(jobAdvert);
         return new SuccessResult("Job Advert has been opened");
+    }
+
+    @Override
+    public Result create(JobAdvertDto jobAdvertDto) {
+
+        JobAdvert jobAdvert = new JobAdvert();
+        jobAdvert.setId(0);
+        jobAdvert.setJobPosition(this.jobPositionDao.getById(jobAdvertDto.getJobPositionId()));
+        jobAdvert.setEmployer(this.employerDao.getById(jobAdvertDto.getEmployerId()));
+        jobAdvert.setCity(this.cityDao.getById(jobAdvertDto.getCityId()));
+        jobAdvert.setWorkTime(this.workTimeDao.getById(jobAdvertDto.getWorkTimeId()));
+        jobAdvert.setWorkPlace(this.workPlaceDao.getById(jobAdvertDto.getWorkPlaceId()));
+        jobAdvert.setSalaryMin(jobAdvertDto.getSalaryMin());
+        jobAdvert.setSalaryMax(jobAdvertDto.getSalaryMax());
+        jobAdvert.setOpenPositionCount(jobAdvertDto.getOpenPositionCount());
+        jobAdvert.setDescription(jobAdvertDto.getDescription());
+        jobAdvert.setPublishedDate(LocalDate.now());
+        jobAdvert.setApplicationDeadline(jobAdvertDto.getApplicationDeadline());
+        jobAdvert.setOpen(true);
+        this.jobAdvertDao.save(jobAdvert);
+        return new SuccessResult("Job advert added.");
+
     }
 
 

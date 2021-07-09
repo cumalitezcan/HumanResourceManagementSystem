@@ -33,7 +33,7 @@ public class SchoolsController {
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<School>> getByCandidateId(int candidateId){
+    public DataResult<List<School>> getByCandidateId(@RequestParam int candidateId){
         return this.schoolService.getByCandidateId(candidateId);
     }
 }

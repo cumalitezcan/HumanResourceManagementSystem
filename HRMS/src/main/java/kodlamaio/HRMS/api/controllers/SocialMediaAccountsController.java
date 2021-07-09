@@ -29,7 +29,7 @@ public class SocialMediaAccountsController {
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<SocialMediaAccount>> getByCandidateId(int candidateId){
+    public DataResult<List<SocialMediaAccount>> getByCandidateId(@RequestParam int candidateId){
         return this.socialMediaAccountService.getByCandidate_Id(candidateId);
     }
 

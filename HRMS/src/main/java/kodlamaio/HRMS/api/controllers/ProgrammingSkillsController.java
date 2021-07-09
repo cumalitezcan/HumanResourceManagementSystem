@@ -27,7 +27,7 @@ public class ProgrammingSkillsController {
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<ProgrammingSkill>> getByCandidateId(int candidateId) {
+    public DataResult<List<ProgrammingSkill>> getByCandidateId(@RequestParam int candidateId) {
         return this.programmingSkillService.getByCandidateId(candidateId);
     }
 }

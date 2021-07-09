@@ -9,5 +9,6 @@ import java.util.List;
 public interface CityService {
     Result add (City city);
     DataResult<List<City>> getAll();
+    DataResult<City> getById(int id);
 
 }

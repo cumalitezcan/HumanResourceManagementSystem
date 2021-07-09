@@ -15,7 +15,7 @@ public interface CandidateDao extends JpaRepository<Candidate,Integer> {
     Candidate deleteById(int id);
 
     @Query("Select new  kodlamaio.HRMS.entities.dtos.CandidateDto"
-            + "(c.firstName, c.lastName, c.email, i.url) "
+            + "(c.firstName, c.lastName, c.email,c.phoneNumber, i.url) "
             + "From Candidate c Inner Join c.images i")
     List<CandidateDto> getDto();
 }

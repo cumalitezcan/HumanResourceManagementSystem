@@ -3,6 +3,7 @@ package kodlamaio.HRMS.business.abstracts;
 import kodlamaio.HRMS.core.utilities.results.DataResult;
 import kodlamaio.HRMS.core.utilities.results.Result;
 import kodlamaio.HRMS.entities.concretes.JobAdvert;
+import kodlamaio.HRMS.entities.dtos.JobAdvertDto;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public interface JobAdvertService {
     DataResult<List<JobAdvert>> getAllActiveJobAdverts();
     DataResult<List<JobAdvert>> getAllByCreationDateAsc();
     DataResult<List<JobAdvert>> getAllActiveJobAdvertByCompanyName(String companyName);
-    public Result closeJobAdvert(int id);
-    public Result openJobAdvert(int id);
+    Result closeJobAdvert(int id);
+    Result openJobAdvert(int id);
+    Result create(JobAdvertDto jobAdvertDto);
 }

@@ -10,11 +10,13 @@ import java.util.List;
 
 public interface EmployerDao extends JpaRepository<Employer,Integer> {
     Employer findByEmail(String email);
+    Employer getById(int id);
 
     @Query("Select new  kodlamaio.HRMS.entities.dtos.EmployerDto"
             + "(e.companyName,e.email, e.webAddress, e.phoneNumber, i.url) "
             + "From Employer e Inner Join e.images i")
     List<EmployerDto> getDto();
+
 
 
 }

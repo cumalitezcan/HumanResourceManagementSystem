@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface SocialMediaAccountDao extends JpaRepository<SocialMediaAccount,Integer> {
     List<SocialMediaAccount> getByCandidate_Id(int candidateId);
+    SocialMediaAccount getById(int id);
 }

@@ -68,4 +68,10 @@ public class EmployerManager implements EmployerService {
     public DataResult<List<EmployerDto>> getDto() {
         return new SuccessDataResult<List<EmployerDto>>(this.employerDao.getDto());
     }
+
+    @Override
+    public DataResult<Employer> getById(int id) {
+        return new SuccessDataResult<Employer>(this.employerDao.getById(id));    }
+
+
 }

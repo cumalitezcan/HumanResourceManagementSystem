@@ -33,7 +33,7 @@ public class LanguagesController {
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<Language>> getByCandidateId(int candidateId){
+    public DataResult<List<Language>> getByCandidateId(@RequestParam int candidateId){
         return this.languageService.getByCandidate_Id(candidateId);
     }
 

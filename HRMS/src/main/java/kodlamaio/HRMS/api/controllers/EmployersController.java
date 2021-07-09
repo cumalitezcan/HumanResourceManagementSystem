@@ -5,7 +5,6 @@ import kodlamaio.HRMS.core.utilities.results.DataResult;
 import kodlamaio.HRMS.core.utilities.results.ErrorDataResult;
 import kodlamaio.HRMS.core.utilities.results.Result;
 import kodlamaio.HRMS.entities.concretes.Employer;
-import kodlamaio.HRMS.entities.dtos.EmployeeDto;
 import kodlamaio.HRMS.entities.dtos.EmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +40,7 @@ public class EmployersController {
     }
 
     @GetMapping("/getByEmail")
-    public DataResult<Employer> getByEmail(String email) {
+    public DataResult<Employer> getByEmail(@RequestParam String email) {
         return this.employerService.getByEmail(email);
     }
 

@@ -33,7 +33,7 @@ public class JobExperiencesController {
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<JobExperience>> getByCandidateId(int candidateId){
+    public DataResult<List<JobExperience>> getByCandidateId(@RequestParam int candidateId){
         return this.jobExperienceService.getByCandidate_Id(candidateId);
     }
 }

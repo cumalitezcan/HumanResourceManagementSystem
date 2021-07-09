@@ -14,8 +14,9 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Table(name="candidates")
 @PrimaryKeyJoinColumn(name="id",referencedColumnName = "id")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+
 public class Candidate extends User {
 
 
@@ -31,6 +32,9 @@ public class Candidate extends User {
 
     @Column(name="birth_year")
     private int birthYear;
+
+    @Column(name="phone_number")
+    private String phoneNumber;
 
     @JsonIgnore
     @OneToMany(mappedBy = "candidate")

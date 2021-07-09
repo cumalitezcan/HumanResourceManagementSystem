@@ -31,5 +31,9 @@ public class CitiesController {
     }
 
 
+    @GetMapping("/getById")
+    public DataResult<City> getById(@RequestParam int id) {
+        return this.cityService.getById(id);
+    }
 
 }
