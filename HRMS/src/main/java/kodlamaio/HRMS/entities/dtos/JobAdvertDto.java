@@ -21,4 +21,5 @@ public class JobAdvertDto {
     private String description;
     private LocalDate applicationDeadline;
     private boolean isOpen;
+
 }

@@ -29,12 +29,15 @@ public class AuthController {
 
     @PostMapping("/registerEmployer")
     public Result registerEmployer(@RequestBody Employer employer, String confirmPassword) {
+        System.out.println(employer);
         return this.authService.registerEmployer(employer, confirmPassword);
     }
 
 
     @PostMapping("/registerCandidate")
-    public Result registerJobSeeker(@RequestBody Candidate candidate , String confirmPassword) {
+    public Result registerCandidate(@RequestBody Candidate candidate , String confirmPassword) {
+        System.out.println(candidate);
+        System.out.println(confirmPassword);
         return this.authService.registerCandidate (candidate, confirmPassword);
     }
 

@@ -1,6 +1,7 @@
 package kodlamaio.HRMS.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,10 +17,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name="id",referencedColumnName = "id")
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Candidate extends User {
-
-
 
     @Column(name="first_name")
     private String firstName;
@@ -55,6 +53,7 @@ public class Candidate extends User {
     @JsonIgnore
     @OneToMany(mappedBy = "candidate")
     private List<JobExperience> jobExperiences;
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "candidate")

@@ -4,6 +4,7 @@ import kodlamaio.HRMS.business.abstracts.JobAdvertService;
 import kodlamaio.HRMS.core.utilities.results.DataResult;
 import kodlamaio.HRMS.core.utilities.results.Result;
 import kodlamaio.HRMS.entities.concretes.JobAdvert;
+import kodlamaio.HRMS.entities.dtos.CandidateDto;
 import kodlamaio.HRMS.entities.dtos.JobAdvertDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +56,7 @@ public class JobAdvertsController {
     }
 
     @GetMapping("/getByNameJobAdvert")
-    public DataResult<JobAdvert> getByJobAdvertName(@RequestParam String jobAdvertName){
+    public DataResult<JobAdvert> getByJobAdvertName(@RequestParam String jobAdvertName) {
         return this.jobAdvertService.getByJobAdvertName(jobAdvertName);
     }
 
@@ -65,12 +66,12 @@ public class JobAdvertsController {
     }
 
     @GetMapping("/getAllByCreationDateAsc")
-    public DataResult<List<JobAdvert>> getAllByCreationDateAsc(){
+    public DataResult<List<JobAdvert>> getAllByCreationDateAsc() {
         return jobAdvertService.getAllByCreationDateAsc();
     }
 
     @GetMapping("/getByIsActiveTrueAndEmployer_CompanyName")
-    public DataResult<List<JobAdvert>> getByIsActiveTrueAndEmployer_CompanyName(@RequestParam String companyName){
+    public DataResult<List<JobAdvert>> getByIsActiveTrueAndEmployer_CompanyName(@RequestParam String companyName) {
         return this.jobAdvertService.getAllActiveJobAdvertByCompanyName(companyName);
     }
 
@@ -84,4 +85,8 @@ public class JobAdvertsController {
         return jobAdvertService.openJobAdvert(id);
     }
 
+    @GetMapping("/getJobAdvertsDto")
+    public DataResult<List<JobAdvertDto>> getDto() {
+        return this.jobAdvertService.getDto();
+    }
 }

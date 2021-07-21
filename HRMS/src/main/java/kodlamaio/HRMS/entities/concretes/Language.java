@@ -27,7 +27,7 @@ public class Language {
     @Column(name = "level")
     private int level;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 

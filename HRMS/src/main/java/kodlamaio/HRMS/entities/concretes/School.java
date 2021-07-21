@@ -31,7 +31,7 @@ public class School {
     @Column(name="graduation_date")
     private LocalDate graduationDate;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 

@@ -34,11 +34,11 @@ public class JobAdvert {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "work_time_id")
     private WorkTime workTime;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "work_place_id")
     private WorkPlace workPlace;
 

@@ -76,7 +76,7 @@ public class AuthManager implements AuthService {
 
         if(!addCandidate.isSuccess()) {
 
-            return new ErrorResult("Employer not registered.");
+            return new ErrorResult("Candidate not registered.");
         }
 
         var code = CodeGenerator.sendVerificationCode();

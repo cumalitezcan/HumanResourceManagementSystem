@@ -25,4 +25,5 @@ public interface JobAdvertService {
     Result closeJobAdvert(int id);
     Result openJobAdvert(int id);
     Result create(JobAdvertDto jobAdvertDto);
+    DataResult<List<JobAdvertDto>> getDto();
 }

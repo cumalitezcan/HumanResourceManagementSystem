@@ -1,6 +1,7 @@
 package kodlamaio.HRMS.dataAccess.abstracts;
 
 import kodlamaio.HRMS.entities.concretes.JobAdvert;
+import kodlamaio.HRMS.entities.dtos.JobAdvertDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -26,4 +27,9 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert,Integer> {
     @Query("From JobAdvert where isOpen = true and employer.companyName=:companyName") //şirket ismine göre listeler
     List<JobAdvert> getAllActiveJobAdvertByEmployer_CompanyName(String companyName);
 
+    @Query("Select new  kodlamaio.HRMS.entities.dtos.JobAdvertDto"
+            + "(j.jobPosition.id,j.employer.id,j.city.id,j.workPlace.id,j.workTime.id," +
+            "j.salaryMax,j.salaryMin,j.openPositionCount,j.description,j.applicationDeadline,j.isOpen) "
+            + "From JobAdvert j")
+    List<JobAdvertDto> getDto();
 }

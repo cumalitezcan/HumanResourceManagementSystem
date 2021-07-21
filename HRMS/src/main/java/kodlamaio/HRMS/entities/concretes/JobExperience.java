@@ -30,7 +30,7 @@ public class JobExperience {
     @Column(name="end_date")
     private LocalDate endDate;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 

@@ -22,7 +22,7 @@ public class ProgrammingSkill {
     @Column(name = "programming_name")
     private String programmingName;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 }

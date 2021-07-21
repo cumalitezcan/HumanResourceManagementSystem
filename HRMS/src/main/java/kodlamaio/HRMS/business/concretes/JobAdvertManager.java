@@ -170,5 +170,10 @@ public class JobAdvertManager implements JobAdvertService {
 
     }
 
+    @Override
+    public DataResult<List<JobAdvertDto>> getDto() {
+        return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao.getDto());
+    }
+
 
 }
